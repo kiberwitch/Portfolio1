@@ -292,6 +292,226 @@ body, html {
    100% { opacity: 1; transform: translateX(0); }
 }
 
+
+
+/* Адаптивные стили */
+@media (max-width: 1200px) {
+   .neon-text {
+     font-size: 36px;
+   }
+   
+   .open-text-btn {
+     font-size: 30px;
+     min-width: 280px;
+   }
+   
+   .contacts-text {
+     font-size: 22px;
+   }
+ }
+ 
+ @media (max-width: 992px) {
+   :root {
+     --float-intensity: 12px;
+     --visible-height: 30vh;
+   }
+   
+   .neon-text {
+     font-size: 32px;
+     -webkit-text-stroke: 1.5px white;
+     text-stroke: 1.5px white;
+   }
+   
+   .open-text-btn {
+     font-size: 26px;
+     min-width: 250px;
+     padding: 15px 30px;
+   }
+   
+   .contacts-text {
+     font-size: 20px;
+   }
+   
+   .icon {
+     width: 50px;
+   }
+   
+   .corner-icon {
+     width: 60px;
+   }
+ }
+ 
+ @media (max-width: 768px) {
+   :root {
+     --visible-height: 25vh;
+   }
+   
+   .neon-text {
+     font-size: 28px;
+     letter-spacing: 3px;
+   }
+   
+   .intro-text {
+     top: 120px;
+   }
+   
+   .name-text {
+     top: 220px;
+   }
+   
+   .open-text-btn {
+     font-size: 22px;
+     min-width: 220px;
+     top: 70% !important;
+   }
+   
+   .contacts-text {
+     font-size: 18px;
+   }
+   
+   .astronaut {
+     width: 25%;
+   }
+   
+   .swiper-pagination-bullet {
+     width: 10px;
+     height: 10px;
+   }
+ }
+ 
+ @media (max-width: 576px) {
+   :root {
+     --float-intensity: 8px;
+     --visible-height: 20vh;
+   }
+   
+   .neon-text {
+     font-size: 20px;
+     letter-spacing: 2px;
+     -webkit-text-stroke: 1px white;
+     text-stroke: 1px white;
+   }
+   
+   .intro-text {
+     top: 100px;
+   }
+   
+   .name-text {
+     top: 180px;
+   }
+   
+   .open-text-btn {
+     font-size: 18px;
+     min-width: 180px;
+     padding: 12px 20px;
+   }
+   
+   #button-text {
+     font-size: 16px;
+   }
+   
+   .contacts-text {
+     font-size: 16px;
+     top: 15px;
+     left: 15px;
+   }
+   
+   .icon {
+     width: 40px;
+     bottom: 15px;
+   }
+   
+   .corner-icon {
+     width: 50px;
+   }
+   
+   .astronaut {
+     width: 30%;
+   }
+   
+   .swiper-pagination {
+     right: 15px !important;
+     gap: 10px;
+   }
+   
+   .swiper-pagination-bullet {
+     width: 8px;
+     height: 8px;
+     margin: 3px 0 !important;
+   }
+ }
+ 
+ @media (max-width: 400px) {
+   .neon-text {
+     font-size: 18px;
+   }
+   
+   .open-text-btn {
+     font-size: 16px;
+     min-width: 160px;
+   }
+   
+   #button-text {
+     font-size: 14px;
+   }
+   
+   .corner-icon {
+     width: 45px;
+   }
+   
+   .intro-text {
+     top: 80px;
+   }
+   
+   .name-text {
+     top: 150px;
+   }
+ }
+ 
+ /* Особые адаптации для очень высоких или очень широких экранов */
+ @media (min-height: 1000px) {
+   .intro-text {
+     top: 200px;
+   }
+   
+   .name-text {
+     top: 350px;
+   }
+   
+   .open-text-btn {
+     top: 80% !important;
+   }
+   
+   :root {
+     --visible-height: 25vh;
+   }
+ }
+ 
+ @media (max-height: 600px) {
+   .intro-text {
+     top: 100px;
+   }
+   
+   .name-text {
+     top: 180px;
+   }
+   
+   .open-text-btn {
+     top: 70% !important;
+     font-size: 24px;
+   }
+   
+   :root {
+     --visible-height: 25vh;
+   }
+   
+   .planet-group {
+     animation: 
+       riseUp 1.5s ease-out forwards,
+       groupFloat 3s ease-in-out infinite;
+   }
+ }
+
 /* Skills Section Styles */
 .skills-container {
    position: absolute;
@@ -373,6 +593,135 @@ body, html {
        transform: translateX(-50%) translateY(0);
    }
 }
+
+/* Адаптация для планшетов */
+@media (max-width: 768px) {
+   .skills-container {
+       top: 3%;
+       width: 95%;
+   }
+   
+   .skills-title {
+       font-size: 2rem;
+   }
+   
+   .skills-grid {
+       grid-template-columns: repeat(2, 1fr);
+       gap: 10px;
+   }
+   
+   .skill-card {
+       padding: 10px 5px;
+   }
+   
+   .decor-line {
+       margin: 10px auto;
+   }
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 576px) {
+   .skills-container {
+       top: 2%;
+       width: 100%;
+       padding: 0 20px;
+   }
+   
+   .skills-title {
+       font-size: 1.8rem;
+       margin: 0.5rem 0;
+   }
+   
+   .skills-grid {
+       grid-template-columns: 1fr;
+       gap: 8px;
+       margin-top: 15px;
+       width: 100%;
+       max-width: 220px;
+       margin-left: auto;
+       margin-right: auto;
+   }
+   
+   .skill-card {
+      height: 50px;
+       width: 100%;
+       padding: 10px;
+       flex-direction: row;
+       justify-content: flex-start;
+       gap: 15px;
+   }
+   
+   .skill-icon {
+       width: 25px;
+       height: 25px;
+       margin-bottom: 0;
+       flex-shrink: 0;
+   }
+   
+   .skill-name {
+       font-size: 0.9rem;
+       text-align: left;
+       flex-grow: 1;
+   }
+   
+   .decor-line {
+       max-width: 250px;
+   }
+}
+
+/* Адаптация для очень маленьких экранов */
+@media (max-width: 400px) {
+   .skills-title {
+       font-size: 1.5rem;
+   }
+   
+   .skills-grid {
+       max-width: 100%;
+   }
+   
+   .skill-card {
+      height: 50px;
+       padding: 8px 10px;
+       gap: 10px;
+   }
+   
+   .skill-icon {
+       width: 22px;
+       height: 22px;
+   }
+   
+   .skill-name {
+       font-size: 0.85rem;
+   }
+}
+
+/* Вертикальная адаптация */
+@media (max-height: 600px) {
+   .skills-container {
+       top: 1%;
+   }
+   
+   .skills-title {
+       font-size: 1.5rem;
+   }
+   
+   .skills-grid {
+       margin-top: 10px;
+   }
+}
+
+@keyframes fadeInUp {
+   from {
+       opacity: 0;
+       transform: translateX(-50%) translateY(50px);
+   }
+   to {
+       opacity: 1;
+       transform: translateX(-50%) translateY(0);
+   }
+}
+
+
 /* Projects Section Styles */
 .projects-container {
    position: absolute;
@@ -700,5 +1049,210 @@ body, html {
    .project-details-btn .corner-icon.bottom-right {
        bottom: -5px;
        right: -5px;
+   }
+}
+
+
+
+
+/* Contacts Form Styles */
+.slide-4 { 
+   background-image: url('../img/background4.jpg');
+   padding-bottom: 0;
+}
+
+.contacts-container {
+   position: absolute;
+   top: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 90%;
+   max-width: 600px;
+   color: white;
+   text-align: center;
+   opacity: 0;
+   animation: fadeInUp 1s ease-out 0.5s forwards;
+   z-index: 10;
+   padding-bottom: 20px;
+}
+
+.contacts-title {
+   font-family: 'Death Star', sans-serif;
+   font-size: 3rem;
+   margin: 1rem 0;
+   text-shadow: 0 0 10px #b97aff, 0 0 20px #b97aff;
+   letter-spacing: 3px;
+}
+
+.contact-form {
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+   margin-top: 30px;
+   padding: 0 20px;
+}
+
+.form-group {
+   position: relative;
+   text-align: left;
+}
+
+.form-group label {
+   display: block;
+   margin-bottom: 8px;
+   font-size: 1.1rem;
+   color: #CEB7FF;
+   text-shadow: 0 0 5px rgba(185, 122, 255, 0.7);
+}
+
+.form-group input,
+.form-group textarea {
+   width: 100%;
+   padding: 12px 0;
+   background: transparent;
+   border: none;
+   border-bottom: 1px solid rgba(206, 183, 255, 0.5);
+   color: white;
+   font-size: 1rem;
+   outline: none;
+   transition: all 0.3s ease;
+}
+
+.form-group textarea {
+   resize: vertical;
+   min-height: 100px;
+}
+
+.form-group .underline {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 0;
+   height: 2px;
+   background: #CEB7FF;
+   transition: all 0.3s ease;
+   box-shadow: 0 0 10px #b97aff;
+}
+
+.form-group input:focus ~ .underline,
+.form-group textarea:focus ~ .underline {
+   width: 100%;
+}
+
+.submit-btn {
+   position: relative;
+   background: transparent;
+   border: none;
+   color: white;
+   font-family: 'Arial Black', Arial, sans-serif;
+   font-size: 1.2rem;
+   padding: 15px 30px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   text-transform: uppercase;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 20px auto 0;
+   outline: none;
+   min-width: 200px;
+}
+
+.submit-btn .corner-icon {
+   position: absolute;
+   width: 50px;
+   height: auto;
+   filter: drop-shadow(0 0 5px var(--neon-color));
+   transition: all 0.3s ease;
+}
+
+.submit-btn .corner-icon.top-left {
+   top: -10px;
+   left: -10px;
+}
+
+.submit-btn .corner-icon.bottom-right {
+   bottom: -10px;
+   right: -10px;
+}
+
+.submit-btn .button-text {
+   position: relative;
+   z-index: 1;
+}
+
+.submit-btn:hover {
+   transform: scale(1.05);
+}
+
+.submit-btn:hover .corner-icon {
+   filter: drop-shadow(0 0 10px var(--neon-color));
+}
+
+/* Form Success Message */
+.form-success {
+   display: none;
+   color: #4CAF50;
+   font-size: 1.2rem;
+   margin-top: 20px;
+   text-shadow: 0 0 5px rgba(76, 175, 80, 0.7);
+}
+
+
+
+/* Анимация встряски для формы при ошибке */
+@keyframes shake {
+   0%, 100% { transform: translateX(0); }
+   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+   20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Стили для полей с ошибкой */
+input.error, textarea.error {
+   border-color: #ff4444;
+   animation: shake 0.5s;
+}
+
+input.error::placeholder, textarea.error::placeholder {
+   color: #ff4444;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+   .contacts-title {
+       font-size: 2rem;
+   }
+   
+   .contact-form {
+       gap: 20px;
+   }
+   
+   .form-group label {
+       font-size: 1rem;
+   }
+   
+   .submit-btn {
+       font-size: 1rem;
+       padding: 12px 25px;
+   }
+}
+
+@media (max-width: 480px) {
+   .contacts-title {
+       font-size: 1.5rem;
+   }
+   
+   .contact-form {
+       gap: 15px;
+   }
+   
+   .submit-btn {
+       font-size: 0.9rem;
+       min-width: 150px;
+   }
+   
+   .submit-btn .corner-icon {
+       width: 40px;
    }
 }

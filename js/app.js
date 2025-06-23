@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
         direction: "vertical",
         slidesPerView: 1,
         mousewheel: true,
+        touchEventsTarget: 'container',
+        allowTouchMove: true,
+        freeMode: false, // Строгое переключение слайдов
+shortSwipes: true, // Короткие свайпы работают
+longSwipes: true, // Длинные свайпы работают
+longSwipesRatio: 0.3, // Процент экрана для длинного свайпа
+longSwipesMs: 300, // Время для определения длинного свайпа
         keyboard: {
             enabled: true,
             onlyInViewport: true,
@@ -44,11 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
         speed: 600,
         on: {
             init: function () {
-                // Анимация стрелок при инициализации
                 animateArrows();
             },
             slideChange: function () {
-                // Анимация стрелок при смене слайда
                 animateArrows();
                 playSoundWithCooldown(iconSound);
             },
@@ -104,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const iconSound = document.getElementById("icon-sound");
     const slideSound = document.getElementById("slide-sound");
     const skillSound = document.getElementById("skill-sound");
+    const swipeSound = document.getElementById("swipe-sound");
+    const errorSound = document.getElementById("error-sound");
     let lastSoundTime = 0;
     const soundCooldown = 500;
 
@@ -112,9 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (now - lastSoundTime > soundCooldown) {
             try {
                 soundElement.currentTime = 0;
-                soundElement
-                    .play()
-                    .catch((e) => console.log("Автовоспроизведение заблокировано:", e));
+                soundElement.play().catch(e => console.log("Автовоспроизведение заблокировано:", e));
                 lastSoundTime = now;
             } catch (e) {
                 console.error("Ошибка воспроизведения звука:", e);
@@ -123,9 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function animateSlideElements(slide) {
-        const elements = slide.querySelectorAll(
-            ".planet-group, .neon-text, .skills-container, .icon, .projects-container"
-        );
+        const elements = slide.querySelectorAll(".planet-group, .neon-text, .skills-container, .icon, .projects-container, .contacts-container");
 
         elements.forEach((el) => {
             el.style.animation = "none";
@@ -142,7 +145,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } else if (
                 el.classList.contains("skills-container") ||
-                el.classList.contains("projects-container")
+                el.classList.contains("projects-container") ||
+                el.classList.contains("contacts-container")
             ) {
                 el.style.animation = "fadeInUp 1s ease-out 0.5s forwards";
             } else if (el.classList.contains("icon")) {
@@ -161,8 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const buttonText = document.getElementById("button-text");
         if (buttonText) {
-            buttonText.innerHTML =
-                "Добро пожаловать в мое портфолио!<br>Я веб-разработчик с опытом создания современных интерактивных интерфейсов.";
+            buttonText.innerHTML = "Добро пожаловать в мое портфолио!<br>Я веб-разработчик с опытом создания современных интерактивных интерфейсов.";
         }
 
         button.style.transform = "translate(-50%, -50%) scale(0.95)";
@@ -197,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Обработка контактов
+    // Обработка контактов - плавная прокрутка к слайду 4
     const contactsButton = document.getElementById("contacts-button");
     if (contactsButton) {
         let isContactsHovered = false;
@@ -215,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         contactsButton.addEventListener("click", function () {
             playSoundWithCooldown(iconSound);
-            alert("Контакты:\nEmail: example@mail.com\nТелефон: +7 (123) 456-78-90");
+            verticalSwiper.slideTo(3, 1000); // Прокрутка к слайду 4 (индекс 3) с анимацией 1 секунда
         });
     }
 
@@ -255,10 +258,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             playSoundWithCooldown(iconSound);
 
-            const projectNumber =
-                this.parentElement.querySelector(".project-number").textContent;
-            const projectName =
-                this.parentElement.querySelector(".project-name").textContent;
+            const projectNumber = this.parentElement.querySelector(".project-number").textContent;
+            const projectName = this.parentElement.querySelector(".project-name").textContent;
 
             const modal = document.createElement("div");
             modal.className = "project-modal";
@@ -343,7 +344,7 @@ HTML5 CSS3 JavaScript Responsive Design Pixel Perfect <br> <br>
                     • Корзина заказов<br>
                     • Отправка данных о заказах<br>
                     • Оставление чаевых <br>
-                    • Выбор допиннгов <br>
+                    • Выбор допинногов <br>
                     • Адаптация под мобильные устройства <br> <br>
  <a href="   https://metimee.tilda.ws">Ссылка на проект</a>
                  
@@ -468,19 +469,116 @@ HTML5 CSS3 JavaScript Responsive Design Pixel Perfect <br> <br>
         });
     });
 
+    // Обработка формы обратной связи
+    const feedbackForm = document.getElementById('feedback-form');
+    
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Проверяем заполнение обязательных полей
+            const nameInput = this.querySelector('input[name="name"]');
+            const emailInput = this.querySelector('input[name="email"]');
+            const messageInput = this.querySelector('textarea[name="message"]');
+            
+            let hasErrors = false;
+            
+            // Проверка каждого поля
+            if (!nameInput.value.trim()) {
+                nameInput.classList.add('error');
+                hasErrors = true;
+            } else {
+                nameInput.classList.remove('error');
+            }
+            
+            if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
+                emailInput.classList.add('error');
+                hasErrors = true;
+            } else {
+                emailInput.classList.remove('error');
+            }
+            
+            if (!messageInput.value.trim()) {
+                messageInput.classList.add('error');
+                hasErrors = true;
+            } else {
+                messageInput.classList.remove('error');
+            }
+            
+            // Если есть ошибки - играем звук ошибки и выходим
+            if (hasErrors) {
+                playSoundWithCooldown(errorSound);
+                
+                // Добавляем анимацию встряски для формы
+                this.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+                
+                return;
+            }
+            
+            // Если все ок - продолжаем как раньше
+            playSoundWithCooldown(iconSound);
+            
+            // Здесь можно добавить отправку формы (AJAX или другой метод)
+            const formData = new FormData(this);
+            
+            // В реальном проекте здесь был бы код отправки данных
+            console.log('Форма отправлена:', Object.fromEntries(formData));
+            
+            // Показываем сообщение об успешной отправке
+            const successMessage = document.createElement('div');
+            successMessage.className = 'form-success';
+            successMessage.textContent = 'Сообщение отправлено! Я свяжусь с вами в ближайшее время.';
+            feedbackForm.appendChild(successMessage);
+            
+            // Очищаем форму
+            feedbackForm.reset();
+            
+            // Показываем сообщение
+            successMessage.style.display = 'block';
+            
+            // Через 5 секунд скрываем сообщение
+            setTimeout(() => {
+                successMessage.style.opacity = '0';
+                setTimeout(() => {
+                    successMessage.remove();
+                }, 300);
+            }, 5000);
+        });
+        
+        // Анимация подчеркивания при фокусе
+        const inputs = feedbackForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            const underline = input.nextElementSibling;
+            
+            input.addEventListener('focus', () => {
+                if (underline) underline.style.width = '100%';
+                playSoundWithCooldown(iconSound);
+                input.classList.remove('error'); // Убираем класс ошибки при фокусе
+            });
+            
+            input.addEventListener('blur', () => {
+                if (underline) underline.style.width = '0';
+            });
+        });
+    }
+
     // Разблокировка аудио при первом клике
-    document.body.addEventListener(
-        "click",
-        function unlockAudio() {
-            iconSound
-                .play()
-                .then(() => {
-                    document.body.removeEventListener("click", unlockAudio);
-                })
-                .catch((e) => {
-                    console.log("Не удалось разблокировать аудио:", e);
-                });
-        },
-        { once: true }
-    );
+    document.body.addEventListener("click", function unlockAudio() {
+        iconSound.play()
+            .then(() => {
+                document.body.removeEventListener("click", unlockAudio);
+            })
+            .catch((e) => {
+                console.log("Не удалось разблокировать аудио:", e);
+            });
+    }, { once: true });
 });
+
+// Функция проверки email
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
