@@ -22,7 +22,6 @@ longSwipesMs: 300, // Время для определения длинного 
         },
         speed: 800,
         effect: "slide",
-        allowTouchMove: false,
         on: {
             init: function () {
                 animateSlideElements(this.slides[this.activeIndex]);
